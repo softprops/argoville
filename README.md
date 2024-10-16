@@ -1,6 +1,7 @@
 # install tools
 
 ```sh
+brew install helm
 brew install argocd
 ```
 
