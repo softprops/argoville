@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.10.3-standalone/service-v1.json
+apiVersion: v1
+kind: Service
+metadata:
+    name: "{{ .Values.appName }}"
+    labels:
+        app: "{{ .Values.appName }}"
+spec:
+    ports:
+        - port: 80
+          protocol: TCP
+    selector:
+        app: "{{ .Values.appName }}"
+        tier: frontend
+    type: NodePort

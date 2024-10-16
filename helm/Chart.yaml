@@ -1,0 +1,8 @@
+apiVersion: v2
+name: webapp
+description: demo argo deployed webapp
+type: application
+# chart version
+version: 0.1.0
+# app appVersion
+appVersion: 0.1.0

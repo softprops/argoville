@@ -1,0 +1,7 @@
+appName: argodemo
+
+port: 80
+
+image:
+    name: nginx
+    tag: latest
