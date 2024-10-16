@@ -34,10 +34,6 @@ authenticate the `argocd` cli
 argocd login 127.0.0.1:8080
 ```
 
-
-
-open http://localhost:8080 in your browser
-
 the default username will be `admin`. run the following to get the password
 
 ```sh
@@ -47,7 +43,9 @@ kubectl -n argocd get secret argocd-initial-admin-secret \
     | pbcopy
 ```
 
-Alternatively create an argo app via
+open http://localhost:8080 in your browser and create app
+
+Alternatively create an argo app via the `argocd` cli
 
 ```sh
 argocd app create argoville \
@@ -55,7 +53,21 @@ argocd app create argoville \
 --path helm \
 --values values-dev.yaml \
 --dest-server https://kubernetes.default.svc \
---dest-namespace dev
+--dest-namespace dev \
+--sync-policy automated \
+--self-heal \
+--auto-prune
 ```
 
-ubectl port-forward service/argodemo -n dev 8082:80
+
+```sh
+kubectl get all --namespace dev
+```
+
+port forward example
+
+```sh
+kubectl port-forward service/argodemo -n dev 8082:80
+```
+
+\-fin
