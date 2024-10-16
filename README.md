@@ -83,4 +83,14 @@ port forward demo app
 kubectl port-forward service/argodemo -n dev 8082:80
 ```
 
+clean up
+
+```sh
+argocd app delete argoville -y
+```
+
+```sh
+kubectl delete ns argo
+```
+
 \-fin
