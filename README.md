@@ -1,11 +1,22 @@
-# install tools
+# argoville
+
+an exploration in arggocd (not to be confused with argo workflows org argo events)
+
+
+## install local deps tools
+
+Install docker/kube as wish I use [Docker Desktop](https://www.docker.com/products/docker-desktop/) with [Kubernetes enabled](https://docs.docker.com/desktop/kubernetes/)
+
+Install cli tools
 
 ```sh
 brew install helm
 brew install argocd
 ```
 
-# install argo cd
+## install argo cd
+
+create a namespace and [install](https://argo-cd.readthedocs.io/en/stable/getting_started/#1-install-argo-cd) it
 
 ```sh
 kubectl apply -f - <<EOF
@@ -43,20 +54,22 @@ kubectl -n argocd get secret argocd-initial-admin-secret \
     | pbcopy
 ```
 
+## create app
+
 open http://localhost:8080 in your browser and create app
 
 Alternatively create an argo app via the `argocd` cli
 
 ```sh
 argocd app create argoville \
---repo https://github.com/softprops/argoville.git \
---path helm \
---values values-dev.yaml \
---dest-server https://kubernetes.default.svc \
---dest-namespace dev \
---sync-policy automated \
---self-heal \
---auto-prune
+    --repo https://github.com/softprops/argoville.git \
+    --path helm \
+    --values values-dev.yaml \
+    --dest-server https://kubernetes.default.svc \
+    --dest-namespace dev \
+    --sync-policy automated \
+    --self-heal \
+    --auto-prune
 ```
 
 
@@ -64,7 +77,7 @@ argocd app create argoville \
 kubectl get all --namespace dev
 ```
 
-port forward example
+port forward demo app
 
 ```sh
 kubectl port-forward service/argodemo -n dev 8082:80
