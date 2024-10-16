@@ -52,6 +52,10 @@ Alternatively create an argo app via
 ```sh
 argocd app create argoville \
 --repo https://github.com/softprops/argoville.git \
---path helm/dev --dest-server https://kubernetes.default.svc \
+--path helm \
+--values values-dev.yaml \
+--dest-server https://kubernetes.default.svc \
 --dest-namespace dev
 ```
+
+ubectl port-forward service/argodemo -n dev 8082:80

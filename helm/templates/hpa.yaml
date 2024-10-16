@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.14.0/horizontalpodautoscaler.json
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+    metadata:
+        name: "{{ .Values.appName }}"
+        labels:
+            app: "{{ .Values.appName }}"
+spec:
+    scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: "{{ .Values.appName }}"
+    minReplicas: 0
+    maxReplicas: 10
+    metrics:
+        - type: Resource
+          resource:
+              name: cpu
+              target:
+                  type: Utilization
+                  averageUtilization: 50
